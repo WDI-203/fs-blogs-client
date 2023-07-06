@@ -20,6 +20,7 @@ const BlogForm = () => {
 		handleNewBlog(newBlog);
 		navigate("/");
 	};
+	// changes in line 9, 14
 
 	return (
 		<div>

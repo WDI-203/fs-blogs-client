@@ -40,6 +40,7 @@ function App() {
 			<Outlet context={{ blogs, handleNewBlog, setShouldRefresh }} />
 		</div>
 	);
+	// Changes in line 8, 20, 33, 40
 }
 
 export default App;
