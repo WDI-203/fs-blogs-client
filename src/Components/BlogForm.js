@@ -1,20 +1,24 @@
 import React, { useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
 
 const BlogForm = () => {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const [author, setAuthor] = useState("");
-	const { handleNewBlog } = useOutletContext();
+
+	const { handleNewBlog, setShouldRefresh } = useOutletContext();
+	const navigate = useNavigate();
 
 	const handleOnSubmit = (e) => {
 		e.preventDefault();
+		setShouldRefresh(true);
 		const newBlog = {
 			title,
 			content,
 			author,
 		};
 		handleNewBlog(newBlog);
+		navigate("/");
 	};
 
 	return (

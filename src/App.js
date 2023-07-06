@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
+import NavBar from "./Components/NavBar";
 import "./App.css";
 
 function App() {
 	const [blogs, setBlogs] = useState({});
+	const [shouldRefresh, setShouldRefresh] = useState(false);
 
 	const url = process.env.REACT_APP_URL_ENDPOINT;
 
@@ -15,7 +17,7 @@ function App() {
 			setBlogs(data);
 		};
 		getData();
-	}, [url]);
+	}, [url, shouldRefresh]);
 
 	const handleNewBlog = async (blog) => {
 		//blog can be anything you want to pass in as a parameter
@@ -28,12 +30,14 @@ function App() {
 		});
 		console.log(response);
 		const data = await response.json();
+		setShouldRefresh(false);
 		console.log("data", data);
 	};
 	return (
 		<div className="App">
-			<h1>Hello</h1>
-			<Outlet context={{ blogs, handleNewBlog }} />
+			<NavBar />
+			<h1>Blogs</h1>
+			<Outlet context={{ blogs, handleNewBlog, setShouldRefresh }} />
 		</div>
 	);
 }

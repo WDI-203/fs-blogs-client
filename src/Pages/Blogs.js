@@ -1,4 +1,5 @@
 import React from "react";
+import BlogCard from "../Components/BlogCard";
 import { useOutletContext } from "react-router-dom";
 
 const Blogs = () => {
@@ -7,11 +8,10 @@ const Blogs = () => {
 	const { data } = blogs;
 	return (
 		<div>
-			Blogs
 			{blogs.success && (
 				<div>
 					{data.map((blog) => {
-						return <p>{blog.title}</p>;
+						return <BlogCard key={blog._id} blog={blog} />;
 					})}
 				</div>
 			)}
