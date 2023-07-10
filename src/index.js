@@ -6,6 +6,7 @@ import Blogs from "./Pages/Blogs";
 import BlogForm from "./Components/BlogForm";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import EditForm from "./Components/EditForm";
 
 const router = createBrowserRouter([
 	{
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
 			{
 				path: "blog-form",
 				element: <BlogForm />,
+			},
+			{
+				path: "edit/:id",
+				element: <EditForm />,
 			},
 		],
 	},

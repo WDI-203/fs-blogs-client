@@ -6,6 +6,8 @@ import "./App.css";
 function App() {
 	const [blogs, setBlogs] = useState({});
 	const [shouldRefresh, setShouldRefresh] = useState(false);
+	const [sortDate, setSortDate] = useState("latest");
+	const [sortedBlogs, setSortedBlogs] = useState([]);
 
 	const url = process.env.REACT_APP_URL_ENDPOINT;
 
@@ -18,6 +20,17 @@ function App() {
 		};
 		getData();
 	}, [url, shouldRefresh]);
+
+	useEffect(() => {
+		if (blogs.success) {
+			const sortBlogs = blogs.data.sort((a, b) => {
+				if (sortDate === "latest")
+					return new Date(b.createAt) - new Date(a.createAt);
+				return new Date(a.createAt) - new Date(b.createAt);
+			});
+			setSortedBlogs(sortBlogs);
+		}
+	}, [blogs, sortDate]);
 
 	const handleNewBlog = async (blog) => {
 		//blog can be anything you want to pass in as a parameter
@@ -37,7 +50,13 @@ function App() {
 		<div className="App">
 			<NavBar />
 			<h1>Blogs</h1>
-			<Outlet context={{ blogs, handleNewBlog, setShouldRefresh }} />
+			<select value={sortDate} onChange={(e) => setSortDate(e.target.value)}>
+				<option value="latest">latest</option>
+				<option value="earliest">earliest</option>
+			</select>
+			<Outlet
+				context={{ blogs, handleNewBlog, setShouldRefresh, sortedBlogs }}
+			/>
 		</div>
 	);
 	// Changes in line 8, 20, 33, 40

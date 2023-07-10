@@ -29,7 +29,10 @@ const BlogForm = () => {
 				<label htmlFor="title">Title: </label>
 				<input value={title} onChange={(e) => setTitle(e.target.value)} />
 				<label htmlFor="content">Content: </label>
-				<input value={content} onChange={(e) => setContent(e.target.value)} />
+				<textarea
+					value={content}
+					onChange={(e) => setContent(e.target.value)}
+				/>
 				<label htmlFor="author">Author: </label>
 				<input value={author} onChange={(e) => setAuthor(e.target.value)} />
 				<button>Post</button>

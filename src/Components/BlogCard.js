@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const BlogCard = ({ blog }) => {
+	console.log(blog);
+	const navigate = useNavigate();
 	return (
 		<div style={{ border: "solid black 0.5px" }}>
 			<h1>{blog.title}</h1>
@@ -8,6 +11,7 @@ const BlogCard = ({ blog }) => {
 				{blog.author}: {blog.createAt}
 			</h5>
 			<p>{blog.content}</p>
+			<button onClick={() => navigate(`/edit/${blog._id}`)}>Edit Blog</button>
 		</div>
 	);
 };

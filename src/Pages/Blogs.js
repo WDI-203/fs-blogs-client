@@ -3,14 +3,13 @@ import BlogCard from "../Components/BlogCard";
 import { useOutletContext } from "react-router-dom";
 
 const Blogs = () => {
-	const { blogs } = useOutletContext();
-	console.log(blogs);
-	const { data } = blogs;
+	const { sortedBlogs, blogs } = useOutletContext();
+
 	return (
 		<div>
 			{blogs.success && (
 				<div>
-					{data.map((blog) => {
+					{sortedBlogs.map((blog) => {
 						return <BlogCard key={blog._id} blog={blog} />;
 					})}
 				</div>
